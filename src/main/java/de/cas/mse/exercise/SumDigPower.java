@@ -1,40 +1,41 @@
 package de.cas.mse.exercise;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+	public List<Long> sumDigPow(long start, long end) {
+		return LongStream.rangeClosed(start, end)
+				.flatMap(this::numberIsSumOfItsDigitsPairwisePowers)
+				.mapToObj(Long::valueOf)
+				.collect(Collectors.toList());
+	}
 
-		List<Long> result = new ArrayList<Long>();
-
-		for (long i = a; i < b; i++) {
-
-			List<Long> longs = new ArrayList<Long>();
-
-			String temp = Long.toString(i);
-
-			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
-			}
-
-			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
-			}
-
-			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
-			}
-
+	private LongStream numberIsSumOfItsDigitsPairwisePowers(Long number) {
+		List<Integer> digits = extractDigits(number.toString());
+		long sumOfPairwisePowers = sumDigitsPairwisePowers(digits);
+		if (sumOfPairwisePowers == number) {
+			return LongStream.of(number);
+		} else {
+			return LongStream.empty();
 		}
+	}
 
-		return result;
+	private long sumDigitsPairwisePowers(List<Integer> digits) {
+		long sum = 0;
+		for (int j = 1; j <= digits.size(); j++) {
+			sum += Math.pow(digits.get(j - 1), j);
+		}
+		return sum;
+	}
 
+	private List<Integer> extractDigits(String completeNumber) {
+		return completeNumber.chars()
+				.mapToObj(it -> Character.toString((char) it))
+				.map(Integer::valueOf)
+				.collect(Collectors.toList());
 	}
 
 }
