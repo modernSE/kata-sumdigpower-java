@@ -40,6 +40,7 @@ public class SumDigPower {
 	// i ist kein guter Parametername
 	// nextCharakterinNumber (Tippfehler + Namenkonventionen + ist kein Char) => besser wäre nextDigitInNumber
 	// Worauf bezieht sich current in currentNumber? Einfach number wäre ausreichend.
+	// gut, dass temp unbenannt wurde
 	
 	private List<Long> getAllDigitsOfCurrentNumber(long i) {
 		List<Long> allDigitsOfCurrentNumber = new ArrayList<Long>();
