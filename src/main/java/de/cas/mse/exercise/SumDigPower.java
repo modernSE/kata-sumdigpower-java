@@ -11,7 +11,7 @@ public class SumDigPower {
 	 * in the range of [lowerBound, upperBound] (inclusive).
 	 */
 	public List<Long> sumDigPow(long lowerBound, long upperBound) {
-		// Mehrzahl "results" - ?
+		// Mehrzahl "results"
 		List<Long> result = new ArrayList<>();
 		for (long number = lowerBound; number < upperBound; number++) {
 			// We like to split the long into digits here
