@@ -1,0 +1,2 @@
+# SumDigPower
+Clean Code Example
