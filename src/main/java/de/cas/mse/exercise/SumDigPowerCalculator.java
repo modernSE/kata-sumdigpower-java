@@ -11,7 +11,7 @@ import java.util.stream.LongStream;
 public class SumDigPowerCalculator {
 
 	public List<Long> calculateNumbers(long lowerBound, long upperBound) {
-		return LongStream.range(lowerBound, upperBound + 1)//
+		return LongStream.rangeClosed(lowerBound, upperBound)//
 				.mapToObj(this::processNumber)//
 				.filter(Optional::isPresent)//
 				.map(Optional::get)//
