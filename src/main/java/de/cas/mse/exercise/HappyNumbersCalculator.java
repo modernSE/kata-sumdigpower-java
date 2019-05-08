@@ -48,7 +48,7 @@ public class HappyNumbersCalculator {
 		for (int i = 0; i < digits.size(); i++) {
 			sumOfPowers += Math.pow(digits.get(i), i + 1);
 		}
-
+		
 		return sumOfPowers;
 	}
 
