@@ -17,6 +17,7 @@ public class SumDigPower {
 
 		for (long currentNumber = startNumber; currentNumber < endNumber; currentNumber++) {
 			
+			// block auslagern?
 			List<Long> digits = splitNumberIntoDigits(currentNumber);
 
 			long powSum = calculatePowSumOfDigits(digits);
@@ -34,7 +35,7 @@ public class SumDigPower {
 		
 		String numberString = Long.toString(number);
 		for (int i = 0; i < numberString.length(); i++) {
-			char digit = numberString.charAt(i);
+			char digit = numberString.charAt(i);						//Schön. Leichter lesbar als mit String und substring()
 			digits.add(Long.valueOf(Character.getNumericValue(digit)));
 		}		
 		return digits;		
