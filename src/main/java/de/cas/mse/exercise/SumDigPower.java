@@ -11,6 +11,7 @@ public class SumDigPower {
 		List<Long> results = new ArrayList<Long>();
 		
 		// auslagern in Methode: checkCandidate o.Ä.?
+		// Zählvariable "i" wäre lesbarer?!
 		for (long currentNumber = startNumber; currentNumber < endNumber; currentNumber++) {
 			List<Long> digitsOfNumber = splitValues(currentNumber);
 			long sum = sumOfDigitPowers(digitsOfNumber);
@@ -23,6 +24,7 @@ public class SumDigPower {
 	}
 	
 	//Einzahl?
+	// Methodenname ist etwas unklar. --> z.B. splitIntoDigits?
 	List<Long> splitValues(long numberToSplit) {
 		List<Long> digitsOfNumber = new ArrayList<Long>();
 		String  stringOfNumber = Long.toString(numberToSplit);
