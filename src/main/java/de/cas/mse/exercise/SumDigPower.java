@@ -33,6 +33,7 @@ public class SumDigPower {
 
 		}
 
+        System.out.println(result);
 		return result;
 
 	}
