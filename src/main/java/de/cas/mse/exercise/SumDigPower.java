@@ -5,37 +5,47 @@ import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+	public List<Long> sumDigPow(long lowerBound, long upperBound) {
 
-		List<Long> result = new ArrayList<Long>();
+		List<Long> propertyFullfillingNumbers = findPropertyFullfillingNumbers(lowerBound, upperBound);
 
-		for (long i = a; i < b; i++) {
+        System.out.println(propertyFullfillingNumbers);
+		return propertyFullfillingNumbers;
+    }
 
-			List<Long> longs = new ArrayList<Long>();
+    private List<Long> findPropertyFullfillingNumbers(long lowerBound, long upperBound) {
+        List<Long> propertyFullfillingNumbers = new ArrayList<>();
+        for (long candidate = lowerBound; candidate < upperBound; candidate++) {
 
-			String temp = Long.toString(i);
+            List<Long> candidateAsDigits = splitNumberIntoDigits(candidate);
 
-			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
+			Long sumOfDigitPowers = calculateSumOfDigitPowers(candidateAsDigits);
+			if (sumOfDigitPowers == candidate) {
+				propertyFullfillingNumbers.add(candidate);
 			}
+        }
+        return propertyFullfillingNumbers;
+    }
+    
+    private List<Long> splitNumberIntoDigits (Long number) {
 
-			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
-			}
+        String numberAsString = Long.toString(number);
 
-			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
-			}
+        List<Long> numberAsDigits = new ArrayList<Long>();
 
-		}
+        for (int i = 0; i < numberAsString.length(); i++) {
+            Long digit = Long.valueOf(numberAsString.substring(i, i + 1));
+            numberAsDigits.add(digit);
+        }
 
-        System.out.println(result);
-		return result;
+        return numberAsDigits;
+    }
 
-	}
-
+    private Long calculateSumOfDigitPowers(List<Long> digits) {
+        long sumOfDigitPowers = 0;
+        for (int i = 0; i < digits.size(); i++) {
+            sumOfDigitPowers += Math.pow(digits.get(i), i + 1);
+        }
+        return sumOfDigitPowers;
+    }
 }
