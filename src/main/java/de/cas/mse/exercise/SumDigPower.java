@@ -5,30 +5,23 @@ import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+	public List<Long> getListOfNumberWhereSumDigPowEqualsNumber(long startValueOfRange, long endValueOfRange) {
 
 		List<Long> result = new ArrayList<Long>();
 
-		for (long i = a; i < b; i++) {
+		for (long actualNumber = startValueOfRange; actualNumber < endValueOfRange; actualNumber++) {
 
-			List<Long> longs = new ArrayList<Long>();
+			List<Long> digitsOfActualNumber;
 
-			String temp = Long.toString(i);
+            String actualNumberAsString = Long.toString(actualNumber);
+            
+            digitsOfActualNumber = splitNumberIntoDigits(actualNumberAsString);
 
-			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
-			}
-
-			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
-			}
+			long sumOfPowedDigits = sumPowedDigits(digitsOfActualNumber);
 
 			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
+			if (sumOfPowedDigits == actualNumber) {
+				result.add(actualNumber);
 			}
 
 		}
@@ -36,6 +29,26 @@ public class SumDigPower {
         System.out.println(result);
 		return result;
 
-	}
+    }
+
+    private long sumPowedDigits(List<Long> digitsOfActualNumber) {
+        // Create sum
+        long sum = 0;
+        for (int actualDigitIndex = 0; actualDigitIndex < digitsOfActualNumber.size(); actualDigitIndex++) {
+        	sum += Math.pow(digitsOfActualNumber.get(actualDigitIndex), actualDigitIndex + 1);
+        }
+        return sum;
+    }
+    
+    private List<Long> splitNumberIntoDigits(String actualNumberAsString){
+            List<Long> digitsOfActualNumber = new ArrayList<>();
+
+        	// Split values
+			for (int actualDigit = 0; actualDigit < actualNumberAsString.length(); actualDigit++) {
+				digitsOfActualNumber.add(Long.valueOf(actualNumberAsString.substring(actualDigit, actualDigit + 1)));
+            }
+            
+            return digitsOfActualNumber;
+    }
 
 }
