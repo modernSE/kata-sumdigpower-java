@@ -5,37 +5,43 @@ import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
-
-		List<Long> result = new ArrayList<Long>();
-
-		for (long i = a; i < b; i++) {
-
-			List<Long> longs = new ArrayList<Long>();
-
-			String temp = Long.toString(i);
-
-			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
-			}
-
-			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
-			}
-
-			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
-			}
-
-		}
-
-        System.out.println(result);
-		return result;
-
+	public List<Long> findAllEurekaNumbersInRangeAndPrint(long lowerBound, long upperBound) {
+		List<Long> eurekaNumbers = findAllEurekaNumbersInRange(lowerBound, upperBound);
+        System.out.println(eurekaNumbers);
+		return eurekaNumbers;
 	}
+
+    private List<Long> findAllEurekaNumbersInRange(long lowerBound, long upperBound) {
+        List<Long> eurekaNumbers = new ArrayList<>();
+        for (long candidate = lowerBound; candidate < upperBound; candidate++) {
+			if (isEurekaNumber(candidate)) {
+				eurekaNumbers.add(candidate);
+			}
+        }
+        return eurekaNumbers;
+    }
+
+    private boolean isEurekaNumber(long candidate) {
+        List<Long> digits = extractDigits(candidate);
+        long sum = sumDigitsPower(digits);
+        return sum == candidate;
+    }
+
+    private long sumDigitsPower(List<Long> digits) {
+        long sum = 0;
+        for (int j = 1; j <= digits.size(); j++) {
+        	sum += Math.pow(digits.get(j - 1), j);
+        }
+        return sum;
+    }
+
+    private List<Long> extractDigits(long candidate) {
+        List<Long> digits = new ArrayList<Long>();
+        String candidateStr = Long.toString(candidate);
+        for (int pos = 0; pos < candidateStr.length(); pos++) {
+        	digits.add(Long.valueOf(candidateStr.substring(pos, pos + 1)));
+        }
+        return digits;
+    }
 
 }
