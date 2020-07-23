@@ -7,35 +7,35 @@ import org.junit.Test;
 
 public class TestSumDigPower {
 
-	private SumDigPower sumDigPower;
+	private EurekaNumbers eurekaNumbers;
 
 	@Before
 	public void setup() {
-		sumDigPower = new SumDigPower();
+		eurekaNumbers = new EurekaNumbers();
 	}
 
 	@Test
-	public void tenTo150_contains89and135() {
-		assertThat(sumDigPower.sumDigPow(10, 150)).containsExactly(89l, 135l);
+	public void shouldReturn89And135() {
+		assertThat(eurekaNumbers.getEurekaNumbers(10, 150)).containsExactly(89l, 135l);
 	}
 
 	@Test
-	public void ninetyTo100_isEmpty() {
-		assertThat(sumDigPower.sumDigPow(90, 100)).isEmpty();
+	public void shouldReturnNoValues() {
+		assertThat(eurekaNumbers.getEurekaNumbers(90, 100)).isEmpty();
 	}
 
 	@Test
-	public void zeroTo100_firstTenNumbersAnd89ShoudBeContained() {
-		assertThat(sumDigPower.sumDigPow(1, 100)).containsExactly(1l, 2l, 3l, 4l, 5l, 6l, 7l, 8l, 9l, 89l);
+	public void shouldReturnFirstTenNumbersAnd89() {
+		assertThat(eurekaNumbers.getEurekaNumbers(1, 100)).containsExactly(1l, 2l, 3l, 4l, 5l, 6l, 7l, 8l, 9l, 89l);
 	}
 
 	@Test
 	public void tenTo100_only89Contained() {
-		assertThat(sumDigPower.sumDigPow(10, 100)).containsExactly(89l);
+		assertThat(eurekaNumbers.getEurekaNumbers(10, 100)).containsExactly(89l);
 	}
 
 	@Test
 	public void firstTenNumbers_shouldBeAllContained() {
-		assertThat(sumDigPower.sumDigPow(1, 10)).containsExactly(1l, 2l, 3l, 4l, 5l, 6l, 7l, 8l, 9l);
+		assertThat(eurekaNumbers.getEurekaNumbers(1, 10)).containsExactly(1l, 2l, 3l, 4l, 5l, 6l, 7l, 8l, 9l);
 	}
 }
