@@ -5,37 +5,46 @@ import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+	public List<Long> sumDigPow(long start, long end) {
 
-		List<Long> result = new ArrayList<Long>();
+		List<Long> results = new ArrayList<Long>();
 
-		for (long i = a; i < b; i++) {
+		for (long currentNumber = start; currentNumber < end; currentNumber++) {
 
-			List<Long> longs = new ArrayList<Long>();
-
-			String temp = Long.toString(i);
-
-			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
-			}
-
-			// Create sum
+			List<Long> splitCharacters = new ArrayList<Long>();
+			String currentNumberAsString = Long.toString(currentNumber);
+            
+            splitNumber(splitCharacters, currentNumberAsString);
+            
 			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
-			}
+			sum = createSum(splitCharacters, sum);
 
 			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
+			if (sum == currentNumber) {
+				results.add(sum);
 			}
-
 		}
 
-        System.out.println(result);
-		return result;
+        System.out.println(results);
+		return results;
 
-	}
+    }
+
+    private void splitNumber(List<Long> splitCharacters, String currentNumberAsString) {
+        for (int index = 0; index < currentNumberAsString.length(); index++) {
+        	splitCharacters.add(Long.valueOf(currentNumberAsString.substring(index, index + 1)));
+        }
+    }
+
+    private long createSum(List<Long> splitCharacters, long sum) {
+        for (int index = 0, pow; index < splitCharacters.size(); index++) {
+           pow = index + 1;
+            sum += Math.pow(splitCharacters.get(index), pow);
+        }
+        return sum;
+    }
+    
+    // 123
+    // 1^1  2^2 3^3 
 
 }
