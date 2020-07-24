@@ -5,37 +5,47 @@ import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+    List<Long> eurekaList = new ArrayList<Long>();
 
-		List<Long> result = new ArrayList<Long>();
+	public List<Long> sumDigPow(long lowerLimit, long upperLimit) {
 
-		for (long i = a; i < b; i++) {
+		for (long currentNumber = lowerLimit; currentNumber < upperLimit; currentNumber++) {
 
-			List<Long> longs = new ArrayList<Long>();
+			List<Long> currentNumberSplitted = new ArrayList<Long>();
 
-			String temp = Long.toString(i);
+			String numberAsString = Long.toString(currentNumber);
 
-			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
-			}
+			splitValues(currentNumberSplitted, numberAsString);
 
-			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
-			}
+			long sum = createSum(currentNumberSplitted);
 
-			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
-			}
+			addToEurekaListIfEqual(currentNumber, sum);
 
 		}
 
-        System.out.println(result);
-		return result;
+        System.out.println(eurekaList);
+		return eurekaList;
 
 	}
+
+    private void addToEurekaListIfEqual(long currentNumber, long sum) {
+        if (sum == currentNumber) {
+        	eurekaList.add(sum);
+        }
+    }
+
+    private long createSum(List<Long> currentNumberSplitted) {
+        long sum = 0;
+        for (int j = 1; j <= currentNumberSplitted.size(); j++) {
+        	sum += Math.pow(currentNumberSplitted.get(j - 1), j);
+        }
+        return sum;
+    }
+
+    private void splitValues(List<Long> currentNumberSplitted, String temp) {
+        for (int possitionPointer = 0; possitionPointer < temp.length(); possitionPointer++) {
+        	currentNumberSplitted.add(Long.valueOf(temp.substring(possitionPointer, possitionPointer + 1)));
+        }
+    }
 
 }
