@@ -17,9 +17,9 @@ We need a function to collect these numbers, that may receive two integers a, b 
 
 If there are no numbers of this kind in the range [a, b] the function should output an empty list.
 
-## Task
-The code is difficult to undestand. How the the **algorithm** work?
-Can you extract functions or intermediary variables? Please help making this easier to understand!
+## Aufgabe
+Der Code ist schwer zu verstehen. Wie funktioniert der **Algorithmus**? Kann man Funktionen extrahieren oder Zwischenvariablen einführen?
+Kannst du hier helfen und den Code lesbarer machen?
 
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/modernSE/kata-sumdigpower-java) 
 
