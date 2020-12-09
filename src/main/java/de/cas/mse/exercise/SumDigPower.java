@@ -5,20 +5,16 @@ import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+	public List<Long> sumDigPower(long rangeStart, long rangeEnd) {
 
-		List<Long> result = new ArrayList<Long>();
+		List<Long> numbersThatMatch = new ArrayList<Long>();
 
-		for (long i = a; i < b; i++) {
+		for (long i = rangeStart; i < rangeEnd; i++) {
 
-			List<Long> longs = new ArrayList<Long>();
-
+			
 			String temp = Long.toString(i);
 
-			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
-			}
+			List<Long> longs = extractDigits(temp);
 
 			// Create sum
 			long sum = 0;
@@ -28,14 +24,21 @@ public class SumDigPower {
 
 			// Test if sum is equal
 			if (sum == i) {
-				result.add(sum);
+				numbersThatMatch.add(sum);
 			}
 
 		}
 
-        System.out.println(result);
-		return result;
+        System.out.println(numbersThatMatch);
+		return numbersThatMatch;
 
 	}
+        private List<Long> extractDigits(String temp) {
+            List<Long> longs = new ArrayList<Long>();
 
+            for (int j = 0; j < temp.length(); j++) {
+				longs.add(Long.valueOf(temp.substring(j, j + 1)));
+            }
+            return longs;
+        }
 }
