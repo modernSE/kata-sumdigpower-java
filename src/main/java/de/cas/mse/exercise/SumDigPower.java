@@ -5,36 +5,42 @@ import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+    private List<Long> extractDigits(long number) {
+        String numberAsString = Long.toString(number);
+        List<Long> digits = new ArrayList<Long>();
+        for (int i = 0; i < numberAsString.length(); i++) {
+            String digit = numberAsString.substring(i, i + 1);
+			digits.add(Long.valueOf(digit));
+        }
+        return digits;
+    }
 
-		List<Long> result = new ArrayList<Long>();
+    private long calculateSumDigPow(long number) {
+        List<Long> digits = extractDigits(number);
+        long sum = 0;
+		for (int i = 1; i <= digits.size(); i++) {
+			sum += Math.pow(digits.get(i - 1), i);
+        }
+        return sum;
+    }
 
-		for (long i = a; i < b; i++) {
+    public List<Long> calculateEurekaNumbers(long lowerBound, long upperBound) {
+        List<Long> eurekaNumbers = new ArrayList<Long>();
 
-			List<Long> longs = new ArrayList<Long>();
-
-			String temp = Long.toString(i);
-
-			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
+        // BUG: upperBound should be inclusive
+		for (long candidate = lowerBound; candidate < upperBound; candidate++) {
+			long sum = calculateSumDigPow(candidate);
+			if (sum == candidate) {
+				eurekaNumbers.add(candidate);
 			}
+        }
+        return eurekaNumbers;
+    }
 
-			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
-			}
-
-			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
-			}
-
-		}
-
-        System.out.println(result);
-		return result;
+	public List<Long> sumDigPow(long lowerBound, long upperBound) {
+		List<Long> eurekaNumbers = calculateEurekaNumbers(lowerBound, upperBound);
+        System.out.println(eurekaNumbers);
+		return eurekaNumbers;
 
 	}
 
