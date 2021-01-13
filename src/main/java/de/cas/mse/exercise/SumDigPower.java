@@ -5,37 +5,44 @@ import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+	public List<Long> sumDigPow(long minRange, long maxRange) {
 
-		List<Long> result = new ArrayList<Long>();
+		List<Long> eurekaNumbers = new ArrayList<Long>();
 
-		for (long i = a; i < b; i++) {
+		for (long numberToTest = minRange; numberToTest < maxRange; numberToTest++) {
+            List<Long> digits = seperateDigits(numberToTest);
 
-			List<Long> longs = new ArrayList<Long>();
+			long sum = sumDigitsToConsecutivePowers(digits);
 
-			String temp = Long.toString(i);
-
-			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
+			if (isEurekaNumber(sum, numberToTest)) {
+				eurekaNumbers.add(sum);
 			}
-
-			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
-			}
-
-			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
-			}
-
 		}
 
-        System.out.println(result);
-		return result;
+        System.out.println(eurekaNumbers);
+		return eurekaNumbers;
 
-	}
+    }
+    
+    private List<Long> seperateDigits(Long numberToSeperate) {
+        List<Long> digits = new ArrayList<Long>();
+		String numberAsString = Long.toString(numberToSeperate);
 
+		for (int digitCounter = 0; digitCounter < numberAsString.length(); digitCounter++) {
+			digits.add(Long.valueOf(numberAsString.substring(digitCounter, digitCounter + 1)));
+        }
+        return digits;
+    }
+
+    private long sumDigitsToConsecutivePowers(List<Long> digits) {
+		long sum = 0;
+		for (int currentDigit = 1; currentDigit <= digits.size(); currentDigit++) {
+			sum += Math.pow(digits.get(currentDigit - 1), currentDigit);
+        }
+        return sum;
+    }
+
+    private boolean isEurekaNumber(long sum, long numberToTest) {
+        return sum == numberToTest;
+    }
 }
