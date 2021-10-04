@@ -11,12 +11,8 @@ public class SumDigPower {
 
 		for (long currentNumber = rangeFromIncl; currentNumber < rangeToExcl; currentNumber++) {
 
-			List<Long> digits = extractDigits(currentNumber);
-
-			long powerSum = calculatePowerSum(digits);
-
-			if (powerSum == currentNumber) {
-				result.add(powerSum);
+			if (isEurokaNumber(currentNumber)) {
+				result.add(currentNumber);
 			}
 
 		}
@@ -24,6 +20,15 @@ public class SumDigPower {
         System.out.println(result);
 		return result;
 
+	}
+
+	private boolean isEurokaNumber(long currentNumber) {
+
+		List<Long> digits = extractDigits(currentNumber);
+
+		long powerSum = calculatePowerSum(digits);
+
+		return currentNumber == powerSum;
 	}
 
 	private long calculatePowerSum(List<Long> digits) {
