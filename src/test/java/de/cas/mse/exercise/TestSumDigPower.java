@@ -16,26 +16,26 @@ public class TestSumDigPower {
 
 	@Test
 	public void tenTo150_contains89and135() {
-		assertThat(sumDigPower.sumDigPow(10, 150)).containsExactly(89l, 135l);
+		assertThat(sumDigPower.sumDigPow(10L, 150L)).containsExactly(89L, 135L);
 	}
 
 	@Test
 	public void ninetyTo100_isEmpty() {
-		assertThat(sumDigPower.sumDigPow(90, 100)).isEmpty();
+		assertThat(sumDigPower.sumDigPow(90L, 100L)).isEmpty();
 	}
 
 	@Test
 	public void zeroTo100_firstTenNumbersAnd89ShoudBeContained() {
-		assertThat(sumDigPower.sumDigPow(1, 100)).containsExactly(1l, 2l, 3l, 4l, 5l, 6l, 7l, 8l, 9l, 89l);
+		assertThat(sumDigPower.sumDigPow(1L, 100L)).containsExactly(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 89L);
 	}
 
 	@Test
 	public void tenTo100_only89Contained() {
-		assertThat(sumDigPower.sumDigPow(10, 100)).containsExactly(89l);
+		assertThat(sumDigPower.sumDigPow(10L, 100L)).containsExactly(89L);
 	}
 
 	@Test
 	public void firstTenNumbers_shouldBeAllContained() {
-		assertThat(sumDigPower.sumDigPow(1, 10)).containsExactly(1l, 2l, 3l, 4l, 5l, 6l, 7l, 8l, 9l);
+		assertThat(sumDigPower.sumDigPow(1L, 10L)).containsExactly(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L);
 	}
 }
