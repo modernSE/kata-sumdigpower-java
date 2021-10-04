@@ -1,41 +1,51 @@
 package de.cas.mse.exercise;
 
 import java.util.ArrayList;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
-
+	public List<Long> getEurekaNumbersInRange(long startInclusive, long endExclusive) {
 		List<Long> result = new ArrayList<Long>();
 
-		for (long i = a; i < b; i++) {
-
-			List<Long> longs = new ArrayList<Long>();
-
-			String temp = Long.toString(i);
-
-			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
+		for (long i = startInclusive; i < endExclusive; i++) {
+			if (isEurekaNumber(i)) {
+				result.add(i);
 			}
-
-			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
-			}
-
-			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
-			}
-
 		}
 
         System.out.println(result);
 		return result;
+	}
 
+	private boolean isEurekaNumber(long number) {
+		List<Long> digits = getDigits(number);
+		long sum = getPowerSum(digits);
+		return sum == number;
+	}
+
+	private List<Long> getDigits(long number) {
+		if (number == 0) {
+			return List.of(0L);
+		}
+
+		Deque<Long> digits = new ArrayDeque<>();
+		while (number > 0) {
+			digits.addFirst(number % 10);
+			number /= 10;
+		}
+
+		return new ArrayList<>(digits);
+	} 
+
+	private long getPowerSum(List<Long> values) {
+		long sum = 0;
+		for (int position = 0; position < values.size(); position++) {
+			sum += Math.pow(values.get(position), position + 1);
+		}
+		return sum;
 	}
 
 }
