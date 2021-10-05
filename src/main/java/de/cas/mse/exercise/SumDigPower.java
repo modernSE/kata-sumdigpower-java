@@ -5,37 +5,40 @@ import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+	public List<Long> getEurekaNumbersInRange(long min, long maxExclusive) {
 
 		List<Long> result = new ArrayList<Long>();
 
-		for (long i = a; i < b; i++) {
+		for (long currNumber = min; currNumber < maxExclusive; currNumber++) {
 
-			List<Long> longs = new ArrayList<Long>();
+			List<Long> currDigits = new ArrayList<Long>();
 
-			String temp = Long.toString(i);
+			String currNumberString = Long.toString(currNumber);
 
 			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
+			for (int i = 0; i < currNumberString.length(); i++) {
+				currDigits.add(Long.valueOf(currNumberString.substring(i, i + 1)));
 			}
 
 			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
+			long currSum = 0;
+			for (int i = 1; i <= currDigits.size(); i++) {
+				currSum += Math.pow(currDigits.get(i - 1), i);
 			}
 
 			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
+			if (currSum == currNumber) {
+				result.add(currSum);
 			}
 
 		}
 
-        System.out.println(result);
 		return result;
 
+	}
+
+	public void printEurekaNumbersInRange(long min, long maxExclusive) {
+		System.out.println(this.getEurekaNumbersInRange(min, maxExclusive));
 	}
 
 }
