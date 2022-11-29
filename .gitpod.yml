@@ -5,5 +5,7 @@ tasks:
 
 vscode:
   extensions:
-    - vscjava.vscode-java-pack
     - redhat.java
+    - vscjava.vscode-java-pack
+    - vscjava.vscode-maven
+    - vscjava.vscode-java-test
