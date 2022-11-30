@@ -5,37 +5,39 @@ import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+	public List<Long> sumDigPow(long lowerLimit, long upperLimit) {
+		List<Long> eurokaNumbers = new ArrayList<Long>();
+		for (long possibleEurokaNumber = lowerLimit; possibleEurokaNumber < upperLimit; possibleEurokaNumber++) {
+			List<Long> digits = splitNumberToDigits(possibleEurokaNumber);
 
-		List<Long> result = new ArrayList<Long>();
+			long sumDigPow = calculateSumDigPow(digits);
 
-		for (long i = a; i < b; i++) {
-
-			List<Long> longs = new ArrayList<Long>();
-
-			String temp = Long.toString(i);
-
-			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
+			if (isEurokaNumber(sumDigPow, possibleEurokaNumber)) {
+				eurokaNumbers.add(sumDigPow);
 			}
-
-			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
-			}
-
-			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
-			}
-
 		}
+		return eurokaNumbers;
+	}
 
-        System.out.println(result);
-		return result;
+	private boolean isEurokaNumber( long sumDigPow, long possibleEurokaNumber) {
+		return sumDigPow == possibleEurokaNumber;
+	}
+	
+	private long calculateSumDigPow(List<Long> digits) {
+		long possibleEurokaNumber = 0;
+		for (int j = 1; j <= digits.size(); j++) {
+			possibleEurokaNumber += Math.pow(digits.get(j - 1), j);
+		}
+		return possibleEurokaNumber;
+	}
 
+	private List<Long> splitNumberToDigits(Long number) {
+		String numberString = Long.toString(number);
+		List<Long> digits = new ArrayList<Long>();
+		for (int j = 0; j < numberString.length(); j++) {
+			digits.add(Long.valueOf(numberString.substring(j, j + 1)));
+		}
+		return digits;
 	}
 
 }
