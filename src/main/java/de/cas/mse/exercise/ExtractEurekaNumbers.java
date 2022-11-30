@@ -27,16 +27,16 @@ public class ExtractEurekaNumbers {
 		String temp = Long.toString(number);
 		List<Long> digits = new ArrayList<Long>();
 
-		for (int j = 0; j < temp.length(); j++) {
-			digits.add(Long.valueOf(temp.substring(j, j + 1)));
+		for (int i = 0; i < temp.length(); i++) {
+			digits.add(Long.valueOf(temp.substring(i, i + 1)));
 		}
 		return digits;
 	}
 
 	private long calcPotentialEurekaNumber(List<Long> digits) {
 		long sum = 0;
-		for (int j = 1; j <= digits.size(); j++) {
-			sum += Math.pow(digits.get(j - 1), j);
+		for (int i = 1; i <= digits.size(); i++) {
+			sum += Math.pow(digits.get(i - 1), i);
 		}
 		return sum;
 	}
