@@ -1,41 +1,40 @@
 package de.cas.mse.exercise;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+	record NumberWithDigits(long number, List<Long> digits){
 
-		List<Long> result = new ArrayList<Long>();
-
-		for (long i = a; i < b; i++) {
-
-			List<Long> longs = new ArrayList<Long>();
-
-			String temp = Long.toString(i);
-
-			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
-			}
-
-			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
-			}
-
-			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
-			}
-
+		static NumberWithDigits of(long number) {
+			var digits = String.valueOf(number)
+				.chars()
+				.mapToObj(Character::toString)
+				.map(Long::valueOf)
+				.toList();
+				  
+			return new NumberWithDigits(number, digits);
 		}
+	}
 
-        System.out.println(result);
-		return result;
+	public List<Long> sumDigPow(long lowerBoundInclusive, long upperBoundExclusive) {
+		return LongStream.range(lowerBoundInclusive, upperBoundExclusive)
+				  .mapToObj(NumberWithDigits::of)
+				  .filter(this::isEurekaNumber)
+				  .mapToLong(NumberWithDigits::number)
+				  .boxed()
+				  .toList();
 
+	}
+
+	private boolean isEurekaNumber(NumberWithDigits number) {
+		var digits = number.digits();
+		var sumOfDigitToPositionPower = IntStream.rangeClosed(1, digits.size())
+			.mapToLong(pos -> (long)Math.pow(digits.get(pos - 1), pos))
+			.sum();
+		return sumOfDigitToPositionPower == number.number();
 	}
 
 }
