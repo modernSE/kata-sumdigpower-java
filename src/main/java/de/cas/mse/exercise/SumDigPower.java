@@ -1,34 +1,25 @@
 package de.cas.mse.exercise;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+	public List<Long> sumDigPow(long min, long max) {
 
-		List<Long> result = new ArrayList<Long>();
+		List<Long> result = new ArrayList<>();
 
-		for (long i = a; i < b; i++) {
+		for (long currentNumber = min; currentNumber < max; currentNumber++) {
 
-			List<Long> longs = new ArrayList<Long>();
+			List<Long> numbers = new ArrayList<>();
 
-			String temp = Long.toString(i);
+			splitValues(numbers, currentNumber);
 
-			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
-			}
+			long currentSum = calculateSum(numbers);
 
-			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
-			}
-
-			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
+			if (currentSum == currentNumber) {
+				result.add(currentSum);
 			}
 
 		}
@@ -36,6 +27,22 @@ public class SumDigPower {
         System.out.println(result);
 		return result;
 
+	}
+
+	private void splitValues(List<Long> numbers, long currentNumber) {
+		char[] digits = Long.toString(currentNumber).toCharArray();
+		for (int i = 0; i < digits.length; i++) {
+			long digit = Long.valueOf(String.valueOf(digits[i]));
+			numbers.add(digit);
+		}
+	}
+
+	private long calculateSum(List<Long> numbers) {
+		long sum = 0;
+		for (int power = 1; power <= numbers.size(); power++) {
+			sum += Math.pow(numbers.get(power - 1), power);
+		}
+		return sum;
 	}
 
 }
