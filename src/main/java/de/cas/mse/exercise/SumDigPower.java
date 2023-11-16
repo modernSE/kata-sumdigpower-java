@@ -6,7 +6,7 @@ import java.util.List;
 public class SumDigPower {
 
 	public List<Long> getEurekaNumbers(long start, long exclusiveEnd) {
-		List<Long> result = new ArrayList<Long>();
+		var result = new ArrayList<Long>();
 
 		for (long candidate = start; candidate < exclusiveEnd; candidate++) {
 			List<Long> digits = getDigits(candidate);
