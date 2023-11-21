@@ -5,37 +5,41 @@ import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+	public List<Long> findAndPrintEurekaNumbers(long minNumber, long maxNumber) {
 
-		List<Long> result = new ArrayList<Long>();
+		List<Long> eurakeNumbers = new ArrayList<Long>();
 
-		for (long i = a; i < b; i++) {
+		for (long currentNumber = minNumber; currentNumber < maxNumber; currentNumber++) {
 
-			List<Long> longs = new ArrayList<Long>();
+			List<Long> currentNumberAsList = new ArrayList<Long>();
+			String currentNumberAsString = Long.toString(currentNumber);
 
-			String temp = Long.toString(i);
+			splitStringToList(currentNumberAsList, currentNumberAsString);
 
-			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
+			long potentialEurekaSum = createPotentialEurekaSum(currentNumberAsList);
+
+			if(potentialEurekaSum == currentNumber) {
+				eurakeNumbers.add(potentialEurekaSum);
 			}
-
-			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
-			}
-
-			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
-			}
-
 		}
 
-        System.out.println(result);
-		return result;
+        System.out.println(eurakeNumbers);
+		return eurakeNumbers;
 
+	}
+
+	private long createPotentialEurekaSum(List<Long> currentNumberAsList) {
+		long potentialEurekaSum = 0;
+		for (int j = 1; j <= currentNumberAsList.size(); j++) {
+			potentialEurekaSum += Math.pow(currentNumberAsList.get(j - 1), j);
+		}
+		return potentialEurekaSum;
+	}
+
+	private void splitStringToList(List<Long> currentNumberAsList, String currentNumberAsString) {
+		for (int j = 0; j < currentNumberAsString.length(); j++) {
+			currentNumberAsList.add(Long.valueOf(currentNumberAsString.substring(j, j + 1)));
+		}
 	}
 
 }
