@@ -21,6 +21,4 @@ If there are no numbers of this kind in the range [a, b] the function should out
 The code is difficult to undestand. How the the **algorithm** work?
 Can you extract functions or intermediary variables? Please help making this easier to understand!
 
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/modernSE/kata-sumdigpower-java) 
-
 

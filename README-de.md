@@ -21,6 +21,4 @@ If there are no numbers of this kind in the range [a, b] the function should out
 Der Code ist schwer zu verstehen. Wie funktioniert der **Algorithmus**? Kann man Funktionen extrahieren oder Zwischenvariablen einführen?
 Kannst du hier helfen und den Code lesbarer machen?
 
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/modernSE/kata-sumdigpower-java) 
-
 
