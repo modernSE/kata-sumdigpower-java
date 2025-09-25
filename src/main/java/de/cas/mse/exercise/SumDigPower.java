@@ -10,8 +10,8 @@ public class SumDigPower {
 
 		String temp = Long.toString(number);
 
-		for (int j = 0; j < temp.length(); j++) {
-			var currentDigit = temp.substring(j, j + 1);
+		for (int pos = 0; pos < temp.length(); pos++) {
+			var currentDigit = temp.substring(pos, pos + 1);
 			digits.add(Long.valueOf(currentDigit));
 		}
 
