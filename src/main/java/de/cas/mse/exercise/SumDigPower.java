@@ -9,12 +9,12 @@ public class SumDigPower {
 
 		List<Long> result = new ArrayList<Long>();
 
-		for (long currentNumber = lowerBound; currentNumber < upperBound; currentNumber++) {
+		for (long currentNumber = lowerBound; currentNumber <= upperBound; currentNumber++) {
 			
 			List<Long> digits = extractDigits(currentNumber);
-			long sum = calculateSum(digits);
+			long powSum = calculatePowSum(digits);
 
-			if (checkEureka(currentNumber, sum)){
+			if (checkEureka(currentNumber, powSum)){
 				result.add(currentNumber);
 			}	
 		}
@@ -25,18 +25,18 @@ public class SumDigPower {
 	}
 
 	private List<Long> extractDigits(long number){
-		List<Long> list = new ArrayList<>();
+		List<Long> digits = new ArrayList<>();
 		String numberString = Long.toString(number);
-		for (int j = 0; j < numberString.length(); j++) {
-			list.add(Long.valueOf(numberString.substring(j, j + 1)));
+		for (int i = 0; i < numberString.length(); i++) {
+			digits.add(Long.valueOf(numberString.substring(i, i + 1)));
 		}
-		return list;
+		return digits;
 	}
 
-	private long calculateSum(List<Long> digits){
+	private long calculatePowSum(List<Long> digits){
 		long sum = 0;
-		for (int j = 1; j <= digits.size(); j++) {
-			sum += Math.pow(digits.get(j - 1), j);
+		for (int i = 1; i <= digits.size(); i++) {
+			sum += Math.pow(digits.get(i - 1), i);
 		}
 		return sum;
 	}
