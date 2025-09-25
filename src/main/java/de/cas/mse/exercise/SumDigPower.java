@@ -5,36 +5,38 @@ import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+	public List<Long> sumDigPow(long lowerLimit, long upperLimit) {
 
-		List<Long> result = new ArrayList<Long>();
+		List<Long> eurekaNumbers = new ArrayList<Long>();
 
-		for (long i = a; i < b; i++) {
+		for (long numberToCheck = lowerLimit; numberToCheck < upperLimit; numberToCheck++) {
 
-			List<Long> longs = new ArrayList<Long>();
+			List<Long> splittedNumber = new ArrayList<Long>();
 
-			String temp = Long.toString(i);
+			String numberAsString = Long.toString(numberToCheck);
+			
+			// Alles mit Kommentar sollte eigene Methode sein
 
 			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
+			for (int indexOfNumber = 0; indexOfNumber < numberAsString.length(); indexOfNumber++) {
+				splittedNumber.add(Long.valueOf(numberAsString.substring(indexOfNumber, indexOfNumber + 1)));
 			}
 
 			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
+			long poweredSum = 0;
+			for (int positionOfNumber = 1; positionOfNumber <= splittedNumber.size(); positionOfNumber++) {
+				poweredSum += Math.pow(splittedNumber.get(positionOfNumber - 1), positionOfNumber);
 			}
 
 			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
+			if (poweredSum == numberToCheck) {
+				eurekaNumbers.add(poweredSum);
 			}
 
 		}
 
-        System.out.println(result);
-		return result;
+        System.out.println(eurekaNumbers);
+		return eurekaNumbers;
 
 	}
 
