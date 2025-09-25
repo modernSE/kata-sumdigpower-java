@@ -5,32 +5,18 @@ import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+	public List<Long> eureukaNumbersBetween(long lowerBound, long upperBound) {
 
 		List<Long> result = new ArrayList<Long>();
 
-		for (long i = a; i < b; i++) {
+		for (long currentNumber = lowerBound; currentNumber < upperBound; currentNumber++) {
+			
+			List<Long> digits = extractDigits(currentNumber);
+			long sum = calculateSum(digits);
 
-			List<Long> longs = new ArrayList<Long>();
-
-			String temp = Long.toString(i);
-
-			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
-			}
-
-			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
-			}
-
-			// Test if sum is equal
-			if (sum == i) {
-				result.add(sum);
-			}
-
+			if (checkEureka(currentNumber, sum)){
+				result.add(currentNumber);
+			}	
 		}
 
         System.out.println(result);
@@ -38,4 +24,24 @@ public class SumDigPower {
 
 	}
 
+	private List<Long> extractDigits(long number){
+		List<Long> list = new ArrayList<>();
+		String numberString = Long.toString(number);
+		for (int j = 0; j < numberString.length(); j++) {
+			list.add(Long.valueOf(numberString.substring(j, j + 1)));
+		}
+		return list;
+	}
+
+	private long calculateSum(List<Long> digits){
+		long sum = 0;
+		for (int j = 1; j <= digits.size(); j++) {
+			sum += Math.pow(digits.get(j - 1), j);
+		}
+		return sum;
+	}
+
+	private boolean checkEureka(long currentNumber, long sum){
+		return sum == currentNumber;
+	}
 }
