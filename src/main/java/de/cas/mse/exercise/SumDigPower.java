@@ -5,26 +5,21 @@ import java.util.List;
 
 public class SumDigPower {
 
-	public List<Long> sumDigPow(long a, long b) {
+	public List<Long> sumDigPow(long lowerBoundary, long upperBoundary) {
 
 		List<Long> result = new ArrayList<Long>();
 
-		for (long i = a; i < b; i++) {
+		for (long i = lowerBoundary; i < upperBoundary; i++) {
 
-			List<Long> longs = new ArrayList<Long>();
+			List<Long> digits = new ArrayList<Long>();
 
-			String temp = Long.toString(i);
+			String number = Long.toString(i);
 
 			// Split values
-			for (int j = 0; j < temp.length(); j++) {
-				longs.add(Long.valueOf(temp.substring(j, j + 1)));
-			}
+			digits = splitValues(digits, number);
 
 			// Create sum
-			long sum = 0;
-			for (int j = 1; j <= longs.size(); j++) {
-				sum += Math.pow(longs.get(j - 1), j);
-			}
+			long sum = createSum(digits);
 
 			// Test if sum is equal
 			if (sum == i) {
@@ -36,6 +31,22 @@ public class SumDigPower {
         System.out.println(result);
 		return result;
 
+	}
+
+	private List<Long> splitValues(List<Long> digits, String number) {
+		for (int j = 0; j < number.length(); j++) {
+			String digit = number.substring(j, j + 1);
+			digits.add(Long.valueOf(digit));
+		}
+		return digits;
+	}
+
+	private long createSum(List<Long> digits) {
+		long sum = 0;
+		for (int j = 1; j <= digits.size(); j++) {
+			sum += Math.pow(digits.get(j - 1), j);
+		}
+		return sum;
 	}
 
 }
